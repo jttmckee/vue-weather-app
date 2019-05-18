@@ -7,9 +7,9 @@
 
     <label for="location">
       Weather at:
-      <input type="text" name="location" placeholder="location" v-model="location">
+      <input type="text" name="location" @keyup.enter="getWeather" placeholder="location" v-model="location">
       </label>
-      <button type="button" @click="getWeather">Get Weather</button>
+      <button type="button" @click="getWeather" >Get Weather</button>
       <div class="weather-status">
         <img :src="iconUrl" v-if="currentWeather"> <div v-if="currentWeather">Weather: <span>{{weatherStatus}}</span></div>
       </div>
@@ -56,7 +56,7 @@ export default {
         this.errorMessage = ''
         this.loading = true
         const weatherResponse = await
-        fetch(`http://api.openweathermap.org/data/2.5/weather?q=${this.location}&APPID=1916709f8ab517d25cbb702d6b210a9e`)
+        fetch(`https://api.openweathermap.org/data/2.5/weather?q=${this.location}&APPID=1916709f8ab517d25cbb702d6b210a9e`)
         console.log(weatherResponse)
         if (weatherResponse.ok) {
           this.currentWeather = await weatherResponse.json()
